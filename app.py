@@ -1,11 +1,12 @@
 from flask import Flask, render_template, jsonify
 import csv
-
+import os
 app = Flask(__name__)
 
 def read_csv():
     data = []
-    with open('Table_Input.csv', 'r') as file:
+    csv_path = os.path.join(app.root_path,'Table_Input.csv')
+    with open(csv_path, 'r') as file:
         csv_reader = csv.reader(file)
         for row in csv_reader:
             data.append(row)
@@ -21,4 +22,4 @@ def get_data():
     return jsonify(data)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
